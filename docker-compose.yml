@@ -1,0 +1,46 @@
+version: '3'
+services:
+  rpi-radio:
+    image: "svanscho/rpi-radio"
+    ports:
+     - "80:2612"
+    devices:
+      - "/dev/snd:/dev/snd" 
+    network_mode: "host"
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 100M
+        reservations:
+          cpus: '0.1'
+          memory: 20M
+  raspotify:
+    image: "svanscho/raspotify"
+    devices:
+      - "/dev/snd:/dev/snd"
+    network_mode: "host"
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 100M
+        reservations:
+          cpus: '0.1'
+          memory: 20M  
+  shairport:
+    image: "svanscho/shairport"
+    devices:
+      - "/dev/snd:/dev/snd"
+    network_mode: "host"  
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 100M
+        reservations:
+          cpus: '0.1'
+          memory: 20M
