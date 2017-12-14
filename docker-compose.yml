@@ -1,9 +1,19 @@
 version: '3'
 services:
+  portainer:
+  docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+    image: "portainer/portainer"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/portainer/data:/data
+    ports:
+      - "9000:9000"
+    deploy:
+      replicas: 1
   rpi-radio:
     image: "svanscho/rpi-radio"
     ports:
-     - "80:2612"
+      - "80:2612"
     devices:
       - "/dev/snd:/dev/snd" 
     network_mode: "host"
@@ -17,7 +27,7 @@ services:
           cpus: '0.1'
           memory: 20M
   raspotify:
-    image: "svanscho/raspotify"
+    image: "svanscho/rpi-spotify"
     devices:
       - "/dev/snd:/dev/snd"
     network_mode: "host"
@@ -31,7 +41,7 @@ services:
           cpus: '0.1'
           memory: 20M  
   shairport:
-    image: "svanscho/shairport"
+    image: "svanscho/rpi-shairport"
     devices:
       - "/dev/snd:/dev/snd"
     network_mode: "host"  
