@@ -25,7 +25,7 @@ services:
         reservations:
           cpus: '0.1'
           memory: 20M
-  raspotify:
+  rpi-spotify:
     image: "svanscho/rpi-spotify"
     devices:
       - "/dev/snd:/dev/snd"
@@ -39,7 +39,7 @@ services:
         reservations:
           cpus: '0.1'
           memory: 20M  
-  shairport:
+  rpi-shairport:
     image: "svanscho/rpi-shairport"
     devices:
       - "/dev/snd:/dev/snd"
